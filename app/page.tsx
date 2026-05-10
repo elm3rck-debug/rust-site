@@ -1,15 +1,25 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+
+  const copyIp = async () => {
+    await navigator.clipboard.writeText("connect 185.207.214.198:35000");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "linear-gradient(to bottom, #07111f, #0b1d33, #07111f)",
+        background: "linear-gradient(to bottom, #07111f, #0b1d33, #07111f)",
         color: "white",
         fontFamily: "Arial",
       }}
     >
-      {/* HEADER */}
       <header
         style={{
           display: "flex",
@@ -21,26 +31,40 @@ export default function Home() {
       >
         <h1 style={{ color: "#ff7a00" }}>LegacyRust</h1>
 
-        <nav style={{ display: "flex", gap: "20px" }}>
+        <nav style={{ display: "flex", gap: "20px", alignItems: "center" }}>
           <a href="#" style={{ color: "white", textDecoration: "none" }}>
             Главная
           </a>
+
           <a href="#" style={{ color: "white", textDecoration: "none" }}>
             Магазин
           </a>
-          <a href="#" style={{ color: "white", textDecoration: "none" }}>
+
+          <a
+            href="https://discord.gg/HJ3tWgNxr8"
+            target="_blank"
+            style={{ color: "white", textDecoration: "none" }}
+          >
             Discord
           </a>
+
+          <button
+            style={{
+              background: "#22c55e",
+              color: "white",
+              border: "none",
+              padding: "12px 22px",
+              borderRadius: "10px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Войти через Steam
+          </button>
         </nav>
       </header>
 
-      {/* HERO */}
-      <section
-        style={{
-          textAlign: "center",
-          padding: "120px 20px",
-        }}
-      >
+      <section style={{ textAlign: "center", padding: "100px 20px 60px" }}>
         <h2
           style={{
             fontSize: "64px",
@@ -51,69 +75,56 @@ export default function Home() {
           LEGACYRUST
         </h2>
 
-        <p
-          style={{
-            fontSize: "22px",
-            opacity: 0.8,
-            marginBottom: "40px",
-          }}
-        >
+        <p style={{ fontSize: "22px", opacity: 0.8 }}>
           Лучший Rust сервер нового поколения
         </p>
-
-        <button
-          style={{
-            background: "#ff7a00",
-            color: "white",
-            border: "none",
-            padding: "16px 40px",
-            borderRadius: "12px",
-            fontSize: "18px",
-            cursor: "pointer",
-          }}
-        >
-          Начать играть
-        </button>
       </section>
 
-      {/* SERVERS */}
       <section
         style={{
           padding: "40px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "20px",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
-        {["Classic", "X2", "MAX3"].map((server) => (
-          <div
-            key={server}
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "600px",
+            background: "#101b2d",
+            padding: "35px",
+            borderRadius: "18px",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <h3 style={{ color: "#ff7a00", fontSize: "26px" }}>
+            LegacyRust Classic
+          </h3>
+
+          <p>IP: 185.207.214.198:35000</p>
+          <p>Онлайн: скоро</p>
+
+          <button
+            onClick={copyIp}
             style={{
-              background: "#101b2d",
-              padding: "30px",
-              borderRadius: "16px",
-              border: "1px solid rgba(255,255,255,0.08)",
+              marginTop: "20px",
+              background: "#ff7a00",
+              border: "none",
+              color: "white",
+              padding: "14px 24px",
+              borderRadius: "10px",
+              cursor: "pointer",
+              fontSize: "16px",
+              fontWeight: "bold",
             }}
           >
-            <h3 style={{ color: "#ff7a00" }}>{server}</h3>
+            {copied ? "IP скопирован!" : "Подключиться"}
+          </button>
 
-            <p>Онлайн: 128/300</p>
-
-            <button
-              style={{
-                marginTop: "20px",
-                background: "#ff7a00",
-                border: "none",
-                color: "white",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            >
-              Подключиться
-            </button>
-          </div>
-        ))}
+          <p style={{ marginTop: "15px", opacity: 0.6 }}>
+            Команда: connect 185.207.214.198:35000
+          </p>
+        </div>
       </section>
     </main>
   );
