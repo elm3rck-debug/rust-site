@@ -40,14 +40,20 @@ export default function Home() {
             Магазин
           </a>
 
-<a
-  href="https://discord.gg/HJ3tWgNxr8"
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{ color: "white", textDecoration: "none" }}
+<button
+  onClick={() =>
+    window.open("https://discord.gg/HJ3tWgNxr8", "_blank")
+  }
+  style={{
+    background: "transparent",
+    border: "none",
+    color: "white",
+    cursor: "pointer",
+    fontSize: "16px",
+  }}
 >
   Discord
-</a>
+</button>
 
           <button
             style={{
