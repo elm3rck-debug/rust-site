@@ -40,13 +40,14 @@ export default function Home() {
             Магазин
           </a>
 
-          <a
-            href="https://discord.gg/HJ3tWgNxr8"
-            target="_blank"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Discord
-          </a>
+<a
+  href="https://discord.gg/HJ3tWgNxr8"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ color: "white", textDecoration: "none" }}
+>
+  Discord
+</a>
 
           <button
             style={{
