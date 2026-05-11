@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [copied, setCopied] = useState(false);
+  const [copiedIp, setCopiedIp] = useState(false);
 
   const copyIp = async () => {
     try {
@@ -11,25 +11,34 @@ export default function Home() {
         "connect 185.207.214.198:35000"
       );
 
-      setCopied(true);
+      setCopiedIp(true);
 
       setTimeout(() => {
-        setCopied(false);
+        setCopiedIp(false);
       }, 2000);
     } catch {
-      alert("Не удалось скопировать IP");
+      alert("Ошибка копирования IP");
     }
   };
 
-  const openDiscord = () => {
-    window.location.href = "https://discord.com/invite/HJ3tWgNxr8";
+  const copyDiscord = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        "https://discord.gg/HJ3tWgNxr8"
+      );
+
+      alert("Discord ссылка скопирована!");
+    } catch {
+      alert("Ошибка копирования Discord ссылки");
+    }
   };
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #07111f, #0b1d33, #07111f)",
+        background:
+          "linear-gradient(to bottom, #07111f, #0b1d33, #07111f)",
         color: "white",
         fontFamily: "Arial, sans-serif",
       }}
@@ -47,6 +56,7 @@ export default function Home() {
           style={{
             color: "#ff7a00",
             margin: 0,
+            fontSize: "32px",
           }}
         >
           LegacyRust
@@ -59,20 +69,16 @@ export default function Home() {
             alignItems: "center",
           }}
         >
-          <button
-            style={navButton}
-          >
+          <button style={navButton}>
             Главная
           </button>
 
-          <button
-            style={navButton}
-          >
+          <button style={navButton}>
             Магазин
           </button>
 
           <button
-            onClick={openDiscord}
+            onClick={copyDiscord}
             style={navButton}
           >
             Discord
@@ -178,7 +184,7 @@ export default function Home() {
               fontWeight: "bold",
             }}
           >
-            {copied ? "IP скопирован!" : "Подключиться"}
+            {copiedIp ? "IP скопирован!" : "Подключиться"}
           </button>
 
           <p
@@ -187,7 +193,7 @@ export default function Home() {
               opacity: 0.6,
             }}
           >
-            Команда:
+            Команда подключения:
           </p>
 
           <code
