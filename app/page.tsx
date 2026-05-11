@@ -1,36 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import AuthButton from "./components/AuthButton";
 
 export default function Home() {
-  const [copiedIp, setCopiedIp] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const copyIp = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        "connect 185.207.214.198:35000"
-      );
+    await navigator.clipboard.writeText(
+      "connect 185.207.214.198:35000"
+    );
 
-      setCopiedIp(true);
+    setCopied(true);
 
-      setTimeout(() => {
-        setCopiedIp(false);
-      }, 2000);
-    } catch {
-      alert("Ошибка копирования IP");
-    }
-  };
-
-  const copyDiscord = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        "https://discord.gg/HJ3tWgNxr8"
-      );
-
-      alert("Discord ссылка скопирована!");
-    } catch {
-      alert("Ошибка копирования Discord ссылки");
-    }
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   return (
@@ -40,76 +25,72 @@ export default function Home() {
         background:
           "linear-gradient(to bottom, #07111f, #0b1d33, #07111f)",
         color: "white",
-        fontFamily: "Arial, sans-serif",
+        fontFamily: "Arial",
       }}
     >
       <header
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
           padding: "20px 40px",
+          alignItems: "center",
           borderBottom: "1px solid rgba(255,255,255,0.1)",
         }}
       >
-        <h1
-          style={{
-            color: "#ff7a00",
-            margin: 0,
-            fontSize: "32px",
-          }}
-        >
-          LegacyRust
-        </h1>
+        <h1 style={{ color: "#ff7a00" }}>LegacyRust</h1>
 
         <nav
           style={{
             display: "flex",
-            gap: "25px",
+            gap: "20px",
             alignItems: "center",
           }}
         >
-          <button style={navButton}>
-            Главная
-          </button>
-
-          <button style={navButton}>
-            Магазин
-          </button>
-
-          <button
-            onClick={copyDiscord}
-            style={navButton}
-          >
-            Discord
-          </button>
-
-          <button
+          <a
+            href="#"
             style={{
-              background: "#22c55e",
-              border: "none",
               color: "white",
-              padding: "12px 22px",
-              borderRadius: "10px",
-              cursor: "pointer",
-              fontWeight: "bold",
-              fontSize: "15px",
+              textDecoration: "none",
             }}
           >
-            Войти через Steam
-          </button>
+            Главная
+          </a>
+
+          <a
+            href="#"
+            style={{
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            Магазин
+          </a>
+
+          <a
+            href="https://discord.com/invite/HJ3tWgNxr8"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            Discord
+          </a>
+
+          <AuthButton />
         </nav>
       </header>
 
       <section
         style={{
           textAlign: "center",
-          padding: "100px 20px 50px",
+          padding: "100px 20px 60px",
         }}
       >
         <h2
           style={{
-            fontSize: "72px",
+            fontSize: "64px",
             marginBottom: "20px",
             color: "#ff7a00",
           }}
@@ -119,7 +100,7 @@ export default function Home() {
 
         <p
           style={{
-            fontSize: "24px",
+            fontSize: "22px",
             opacity: 0.8,
           }}
         >
@@ -129,96 +110,64 @@ export default function Home() {
 
       <section
         style={{
+          padding: "40px",
           display: "flex",
           justifyContent: "center",
-          padding: "30px",
         }}
       >
         <div
           style={{
             width: "100%",
-            maxWidth: "650px",
+            maxWidth: "600px",
             background: "#101b2d",
-            padding: "40px",
-            borderRadius: "20px",
+            padding: "35px",
+            borderRadius: "18px",
             border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <h3
             style={{
               color: "#ff7a00",
-              fontSize: "30px",
-              marginBottom: "20px",
+              fontSize: "26px",
             }}
           >
             LegacyRust Classic
           </h3>
 
-          <p
-            style={{
-              fontSize: "18px",
-            }}
-          >
-            IP: 185.207.214.198:35000
-          </p>
+          <p>IP: 185.207.214.198:35000</p>
 
-          <p
-            style={{
-              fontSize: "18px",
-            }}
-          >
-            Онлайн: скоро
-          </p>
+          <p>Онлайн: скоро</p>
 
           <button
             onClick={copyIp}
             style={{
-              marginTop: "25px",
+              marginTop: "20px",
               background: "#ff7a00",
               border: "none",
               color: "white",
-              padding: "15px 28px",
+              padding: "14px 24px",
               borderRadius: "10px",
               cursor: "pointer",
-              fontSize: "17px",
+              fontSize: "16px",
               fontWeight: "bold",
             }}
           >
-            {copiedIp ? "IP скопирован!" : "Подключиться"}
+            {copied
+              ? "IP скопирован!"
+              : "Подключиться"}
           </button>
 
           <p
             style={{
-              marginTop: "20px",
+              marginTop: "15px",
               opacity: 0.6,
             }}
           >
-            Команда подключения:
-          </p>
-
-          <code
-            style={{
-              display: "block",
-              marginTop: "10px",
-              background: "#07111f",
-              padding: "15px",
-              borderRadius: "10px",
-              color: "#ff7a00",
-              fontSize: "16px",
-            }}
-          >
+            Команда:
             connect 185.207.214.198:35000
-          </code>
+          </p>
         </div>
       </section>
     </main>
   );
 }
-
-const navButton: React.CSSProperties = {
-  background: "transparent",
-  border: "none",
-  color: "white",
-  cursor: "pointer",
-  fontSize: "16px",
-};
